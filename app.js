@@ -9,12 +9,11 @@ const saveBtn = document.querySelector('#jsSave');
 const INITIAL_COLOR = "#2c2c2c"
 const CANVAS_SIZE = 700;
 
-
 canvas.width = document.getElementsByClassName("canvas")[0].offsetWidth;
 canvas.height = document.getElementsByClassName("canvas")[0].offsetHeight;
 
 ctx.fillStyle = "white";
-ctx.fillRect(0,0, CANVAS_SIZE, CANVAS_SIZE);
+ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
 ctx.strokeStyle = "INITIAL_COLOR";
 ctx.fillStyle = "INITIAL_COLOR"
@@ -25,25 +24,25 @@ ctx.lineWidth = 2.5;
 let painting = false;
 let filling = false;
 
-function stopPainting(event){
-painting = false;
+function stopPainting(event) {
+	painting = false;
 }
 
-function startPainting(event){
+function startPainting(event) {
 	painting = true;
 }
 
-function onMouseMove(event){
+function onMouseMove(event) {
 	const x = event.offsetX;
 	const y = event.offsetY;
-	if(!painting){
+	if (!painting) {
 		//경로를 만든다
 
 		ctx.beginPath();
 		//경로 생성
 		ctx.moveTo(x, y);
 		//선 시작 좌표
-	} else{
+	} else {
 		//그린다.
 
 		ctx.lineTo(x, y);
@@ -53,37 +52,37 @@ function onMouseMove(event){
 	}
 }
 
-function handleColorClick(event){
+function handleColorClick(event) {
 	const color = event.target.style.backgroundColor;
 	ctx.strokeStyle = color;
 	ctx.fillStyle = color;
 
 }
 
-function handleRangeChange(event){
-	const strokeSize =  event.target.value;
+function handleRangeChange(event) {
+	const strokeSize = event.target.value;
 	ctx.lineWidth = strokeSize;
 }
 
-function handleModeClick(){
-if(filling === true) {
-	filling = false;
-	mode.innerText = "Fill";
-}else{
-	filling = true;
-	mode.innerText = "Paint";
-}
-}
-
-function handleCanvasClick(event){
-	
-
-	if(filling){
-		ctx.fillRect(0,0, CANVAS_SIZE, CANVAS_SIZE);
+function handleModeClick() {
+	if (filling === true) {
+		filling = false;
+		mode.innerText = "Fill";
+	} else {
+		filling = true;
+		mode.innerText = "Paint";
 	}
 }
 
-function handleSaveClick(event){
+function handleCanvasClick(event) {
+
+
+	if (filling) {
+		ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+	}
+}
+
+function handleSaveClick(event) {
 	const image = canvas.toDataURL();
 	const link = document.createElement("a");
 	link.href = image;
@@ -92,31 +91,31 @@ function handleSaveClick(event){
 }
 
 
-function handleResetClick(event){
+function handleResetClick(event) {
 	window.location.reload();
 }
 
-if(canvas){
-	canvas.addEventListener('mousemove',onMouseMove);
-	canvas.addEventListener('mousedown',startPainting);
-	canvas.addEventListener('mouseup',stopPainting);
-	canvas.addEventListener('mouseleave',stopPainting);
-	canvas.addEventListener('click',handleCanvasClick);
+if (canvas) {
+	canvas.addEventListener('mousemove', onMouseMove);
+	canvas.addEventListener('mousedown', startPainting);
+	canvas.addEventListener('mouseup', stopPainting);
+	canvas.addEventListener('mouseleave', stopPainting);
+	canvas.addEventListener('click', handleCanvasClick);
 }
 
-Array.from(colors).forEach(potato => 
-	potato.addEventListener("click",handleColorClick));
+Array.from(colors).forEach(potato =>
+	potato.addEventListener("click", handleColorClick));
 
-	if(range){
-		range.addEventListener("input",handleRangeChange);
-	}
+if (range) {
+	range.addEventListener("input", handleRangeChange);
+}
 
-	if(mode){
-		mode.addEventListener('click',handleModeClick);
-	}
+if (mode) {
+	mode.addEventListener('click', handleModeClick);
+}
 
-	if(saveBtn){
-		saveBtn.addEventListener("click",handleSaveClick);
-	}
+if (saveBtn) {
+	saveBtn.addEventListener("click", handleSaveClick);
+}
 
-	clear.addEventListener('click',handleResetClick);
+clear.addEventListener('click', handleResetClick);
