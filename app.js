@@ -10,7 +10,6 @@ const INITIAL_COLOR = "#2c2c2c"
 const CANVAS_SIZE = 700;
 
 
-
 canvas.width = document.getElementsByClassName("canvas")[0].offsetWidth;
 canvas.height = document.getElementsByClassName("canvas")[0].offsetHeight;
 
