@@ -5,6 +5,7 @@ const range = document.querySelector('#jsRange');
 const mode = document.querySelector('#jsMode');
 const clear = document.querySelector('#jsClear');
 const saveBtn = document.querySelector('#jsSave');
+const erase = document.getElementById("jsErase");
 
 const INITIAL_COLOR = "#2c2c2c"
 const CANVAS_SIZE = 700;
@@ -19,7 +20,7 @@ ctx.strokeStyle = "INITIAL_COLOR";
 ctx.fillStyle = "INITIAL_COLOR"
 ctx.lineWidth = 2.5;
 
-
+background = "white";
 
 let painting = false;
 let filling = false;
@@ -95,12 +96,22 @@ function handleResetClick(event) {
 	window.location.reload();
 }
 
+
+
+
 if (canvas) {
 	canvas.addEventListener('mousemove', onMouseMove);
 	canvas.addEventListener('mousedown', startPainting);
 	canvas.addEventListener('mouseup', stopPainting);
 	canvas.addEventListener('mouseleave', stopPainting);
 	canvas.addEventListener('click', handleCanvasClick);
+}
+
+
+
+function handleEraseClick() { 
+	// painting = true;
+  ctx.strokeStyle = background;
 }
 
 Array.from(colors).forEach(potato =>
@@ -114,8 +125,13 @@ if (mode) {
 	mode.addEventListener('click', handleModeClick);
 }
 
+
+
 if (saveBtn) {
 	saveBtn.addEventListener("click", handleSaveClick);
 }
 
 clear.addEventListener('click', handleResetClick);
+
+
+erase.addEventListener("click", handleEraseClick);
